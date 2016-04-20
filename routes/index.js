@@ -7,7 +7,7 @@ var router = express.Router();
 var port = process.env.PORT || 8080;
 
 router.get('/', function (req, res) {
-    res.send('Hello! The API is at http://localhost:' + port + '/api');
+    res.send('Hello!');
 });
 
 router.post('/authenticate', userController.authenticate);
