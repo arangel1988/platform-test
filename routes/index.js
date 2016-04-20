@@ -10,6 +10,7 @@ router.get('/', function (req, res) {
     res.send('Hello!');
 });
 
+
 router.post('/authenticate', userController.authenticate);
 router.get('/logout', middleware.protected, userController.logout);
 
