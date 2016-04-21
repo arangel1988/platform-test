@@ -68,6 +68,9 @@ exports.authenticate = function (request, response) {
     let password = request.body.password;
     userService.authenticate(email, password).then(function (value) {
         response.json(value);
+    }).catch(function () {
+        response.status(404);
+        return response.json({"message": "Invalid User or password"});
     })
 };
 
