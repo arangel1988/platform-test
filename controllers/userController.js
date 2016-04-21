@@ -16,7 +16,6 @@ exports.get = function (request, response) {
         response.status(404);
         return response.json({"message": "User not found"});
     })
-
 };
 
 exports.add = function (request, response) {
