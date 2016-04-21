@@ -9,14 +9,14 @@ var bcrypt = Promise.promisifyAll(require('bcrypt'));
 var SUCCESS = "Success login";
 var FAIL = 'Authentication failed. Wrong password.';
 
-exports.authenticate = function (mail, password) {
+exports.authenticate = function (email, password) {
     "use strict";
     var value = {};
     var mUser;
     return new Promise(function (resolve, reject) {
         models.user.findOne({
             where: {
-                email: mail
+                email: email
             }
         }).then(function (user) {
             mUser = user;
@@ -65,11 +65,11 @@ exports.set = function (id, mUser) {
     return new Promise(function (resolve, reject) {
         models.user.findById(id).then(function (user) {
             if (user) {
-                return exports.updateValues(user, mUser)
+                return exports.updateValues(user, mUser);
             }
             return reject();
         }).then(function (updatedUser) {
-            return updatedUser.save()
+            return updatedUser.save();
         }).then(function (value) {
             return resolve(value)
         }).catch(function (e) {
@@ -84,7 +84,8 @@ exports.delete = function (id) {
             if (mUser) {
                 return mUser.destroy();
             }
-            return reject();
+            else
+                return reject();
         }).then(function () {
             return resolve({success: true});
         }).catch(function (e) {
@@ -108,7 +109,6 @@ exports.updateValues = function (user, mUser) {
         }
         else
             return resolve(user);
-
     });
 };
 
