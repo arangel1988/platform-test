@@ -3,7 +3,7 @@ var models = require("../models");
 
 exports.all = function (request, response) {
     models.user.findAll().then(function (users) {
-        response.json(users);
+        return response.json(users);
     })
 };
 
@@ -11,7 +11,7 @@ exports.get = function (request, response) {
     "use strict";
     let id = request.params.id;
     userService.get(id).then(function (user) {
-        response.json(user);
+        return response.json(user);
     }).catch(function () {
         response.status(404);
         return response.json({"message": "User not found"});
@@ -23,7 +23,7 @@ exports.add = function (request, response) {
     "use strict";
     let user = exports.buildUserObject(request.body);
     userService.add(user).then(function (value) {
-        response.json(value);
+        return response.json(value);
     }).catch(function (e) {
         return response.json(e);
     });
@@ -46,9 +46,8 @@ exports.set = function (request, response) {
     let user = exports.buildUserObject(request.body);
 
     userService.set(id, user).then(function (value) {
-        response.json(value);
+        return response.json(value);
     });
-
 };
 
 exports.buildUserObject = function (body) {
@@ -78,5 +77,5 @@ exports.logout = function (request, response) {
     "use strict";
     let token = request.body.token || request.query.token || request.headers['x-access-token'];
 
-    response.json(userService.logout(token));
+    return response.json(userService.logout(token));
 };
